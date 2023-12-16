@@ -31,6 +31,12 @@ final class HandepayWC {
      * @return void
      */
     public function init() {
+
+        if(!class_exists('WooCommerce')){
+            // Load the admin notice if WooCommerce is not active.
+            add_action( 'admin_notices', [$this, 'woocommerce_admin_notice'] );
+            return;
+        }
         
         add_action('admin_init', [$this, 'admin_init']);
 
@@ -50,7 +56,6 @@ final class HandepayWC {
      */
     public function admin_init(){
         
-        // Only admin initializations
 
     }
 
@@ -74,6 +79,13 @@ final class HandepayWC {
 
     public static function plugin_path(){
         return plugin_dir_path(__FILE__);
+    }
+
+    public static function woocommerce_admin_notice(){
+
+        echo '<div class="notice notice-warning is-dismissible">
+            <p>Important! <strong>Handepay WooCommerce Payment Gateway</strong> requires <strong>WooCommerce</strong> to be installed and activated.</p>
+        </div>';
     }
 }
 
