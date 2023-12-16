@@ -67,6 +67,8 @@ final class HandepayWC {
     public function load_plugin(){
 
         // Load the plugin
+        add_filter('woocommerce_payment_gateways', [$this, 'register_new_gateway']);
+
     }
 
     public function enqueue_frontend_scripts(){
@@ -86,6 +88,13 @@ final class HandepayWC {
         echo '<div class="notice notice-warning is-dismissible">
             <p>Important! <strong>Handepay WooCommerce Payment Gateway</strong> requires <strong>WooCommerce</strong> to be installed and activated.</p>
         </div>';
+    }
+
+    public function register_new_gateway($methods){
+
+        $methods[] = 'HandePayWC\Core\HandepayWooCommerceGateway';
+        
+        return $methods;
     }
 }
 
