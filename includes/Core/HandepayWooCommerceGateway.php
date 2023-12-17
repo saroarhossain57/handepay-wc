@@ -28,23 +28,23 @@ class HandepayWooCommerceGateway extends \WC_Payment_Gateway {
 
         $this->form_fields = array(
             'enabled' => array(
-                'title'       => 'Enable/Disable',
-                'label'       => 'Enable HandePay Payment Gateway',
+                'title'       => __('Enable/Disable', 'handeepay-wc'),
+                'label'       => __('Enable HandePay Payment Gateway', 'handeepay-wc'),
                 'type'        => 'checkbox',
                 'description' => '',
                 'default'     => 'no',
             ),
             'title' => array(
-                'title'       => 'Title',
+                'title'       => __('Title', 'handeepay-wc'),
                 'type'        => 'text',
-                'description' => 'This controls the title which the user sees during checkout.',
+                'description' => __('This controls the title which the user sees during checkout.', 'handeepay-wc'),
                 'default'     => 'HandePay',
                 'desc_tip'    => true,
             ),
             'description' => array(
-                'title'       => 'Description',
+                'title'       => __('Description', 'handeepay-wc'),
                 'type'        => 'textarea',
-                'description' => 'This controls the description which the user sees during checkout.',
+                'description' => __('This controls the description which the user sees during checkout.', 'handeepay-wc'),
                 'default'     => 'Pay with HandePay',
                 'desc_tip'    => true,
             )
@@ -53,5 +53,7 @@ class HandepayWooCommerceGateway extends \WC_Payment_Gateway {
 
     public function process_payment($order_id){
         
+        wc_add_notice( __('Payment error:', 'handeepay-wc') , 'error' );
+        return;
     }
 }
